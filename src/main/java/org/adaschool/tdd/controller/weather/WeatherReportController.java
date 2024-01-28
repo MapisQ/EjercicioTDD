@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping( "/v1/weather" )
-public class WeatherReportController
-{
+public class WeatherReportController {
     private final WeatherService weatherService;
 
     public WeatherReportController( @Autowired WeatherService weatherService )
@@ -43,10 +43,10 @@ public class WeatherReportController
         return weatherService.findNearLocation( query.getGeoLocation(), query.getDistanceRangeInMeters() );
     }
 
-    @GetMapping( "reporter/{id}" )
-    public List<WeatherReport> findByReporterId( @PathVariable String name )
+    @GetMapping( "reporter/{reporter}" )
+    public List<WeatherReport> findWeatherReportByReporter(@PathVariable("reporter") String reporter )
     {
-        return weatherService.findWeatherReportsByName( name );
+        return weatherService.findWeatherReportByReporter(reporter);
     }
 
 
